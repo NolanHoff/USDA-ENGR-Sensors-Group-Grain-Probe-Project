@@ -1,2 +1,2 @@
 # USDA-ENGR-Sensors-Group-Grain-Probe-Project
-Code Base for Individuals Involved in Coding the Grain Probe Project
+Project has been given the formal name: GrainProbe Environmental Monitor
