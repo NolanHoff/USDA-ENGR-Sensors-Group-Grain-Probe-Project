@@ -3,8 +3,7 @@
 #Created: 5/21/2026
 #Micro Controller: Raspberry Pi Pico W
 #Interpreter: MicroPython
-#Main Code
-#hdc302x_sensor.py
+#Main Code: hdc302x_sensor.py
 #Last Edit: NolanRH on 5/27/2026
 
 #hdc302x_sensor.py Imports
