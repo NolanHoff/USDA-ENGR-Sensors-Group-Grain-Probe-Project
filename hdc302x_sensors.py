@@ -4,7 +4,7 @@
 #Micro Controller: Raspberry Pi Pico W
 #Interpreter: MicroPython
 #Main Code: hdc302x_sensor.py
-#Last Edit: NolanRH on 5/27/2026
+#Last Edit: NolanRH on 5/28/2026
 
 #hdc302x_sensor.py Imports
 from machine import Pin, I2C
@@ -15,7 +15,7 @@ import hdc302x_library #Library Import (hdc302x_library.py)
 class HDC302X_Sensors:
     #I2C Buses
     i2c0 = I2C(0, scl=Pin(1), sda=Pin(0), freq=100000) #I2C Bus 0 (GP1=SCL, GP0=SDA)
-    i2c1 = I2C(1, scl=Pin(7), sda=Pin(6), freq=100000) #I2C Bus 1 (GP3=SCL, GP2=SDA)
+    i2c1 = I2C(1, scl=Pin(3), sda=Pin(2), freq=100000) #I2C Bus 1 (GP3=SCL, GP2=SDA)
     
     bus0 = [
         ("Sensor 1", "x044", hdc302x_library.HDC302X(i2c0, address=0x44)), #Sensor 1
@@ -31,60 +31,77 @@ class HDC302X_Sensors:
     
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~DEBUGGING FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 #~~~~~~~~~~~~~~~~~~~~~~(Functions Should be put in Main Loop to Debug)~~~~~~~~~~~~~~~~~~~~~~#
+    
+    #print(f"{sensor_name} ERROR:", e) #Exeception Error Print <--Place This Print in Exception Loop to See Error Type
+    
     @staticmethod 
     def debug_readings():
-        timestamps = []
-        #Debug Print for Bus 0
-        sensorsBus0 = []
-        addrsBus0 = []
-        tempsBus0 = []
-        humiditiesBus0 = []
+        timestamps = [] #Lists all I2C Sensors Timestamps for Print Statements
+    #Debug Data for Bus 0 Print
+        sensorsBus0 = [] #Lists Bus 0 Sensors Names for Print Statements
+        addrsBus0 = [] #Lists Bus 0 Sensors Addresses for Print Statements
+        tempsBus0 = [] #Lists Bus 0 Sensors Temperatures for Print Statements
+        humiditiesBus0 = [] #Lists Bus 0 Humidities Names for Print Statements
         for i, (sensor_name, addrs, sensor) in enumerate(HDC302X_Sensors.bus0):
             try:
+                #Grabs Bus 0 Sensor Data
                 temp = sensor.temperature
                 hum = sensor.relative_humidity
+                #Appends Bus 0 Sensor Data
                 sensorsBus0.append(sensor_name)
                 addrsBus0.append(addrs)
                 tempsBus0.append(temp)
                 humiditiesBus0.append(hum)
+                #Takes Current Timestamp
                 now = time.localtime() #To Accurately Timestamp Each Sensor Separately, Must Copy to Each Enumeration of Try/Except
                 times = ("{:04d}-{:02d}-{:02d} " "{:02d}:{:02d}:{:02d}").format(now[0], now[1], now[2], now[3], now[4], now[5], now[6], now[7])
+                #Appends Timestamp
                 timestamps.append(times)
             except Exception as e:
-                #print(f"{sensor_name} ERROR:", e) #Exeception Error Print
+                #Appends Placeholder Bus 0 Sensor Data
                 sensorsBus0.append(sensor_name)
                 addrsBus0.append(addrs)
                 tempsBus0.append(0.0)
                 humiditiesBus0.append(0.0)
+                #Takes Current Timestamp
                 now = time.localtime() #To Accurately Timestamp Each Sensor Separately, Must Copy to Each Enumeration of Try/Except
                 times = ("{:04d}-{:02d}-{:02d} " "{:02d}:{:02d}:{:02d}").format(now[0], now[1], now[2], now[3], now[4], now[5], now[6], now[7])
+                #Appends Timestamp
                 timestamps.append(times)
-        #Debug Print for Bus 1
-        sensorsBus1 = []
-        addrsBus1 = []
-        tempsBus1 = []
-        humiditiesBus1 = []
+                
+    #Debug Data for Bus 1 Print
+        sensorsBus1 = [] #Lists Bus 1 Sensors Names for Print Statements
+        addrsBus1 = [] #Lists Bus 1 Sensors Addresses for Print Statements
+        tempsBus1 = [] #Lists Bus 1 Sensors Temperatures for Print Statements
+        humiditiesBus1 = [] #Lists Bus 1 Sensors Humidities for Print Statements
         for i, (sensor_name, addrs, sensor) in enumerate(HDC302X_Sensors.bus1):
             try:
+                #Grabs Bus 1 Sensor Data
                 temp = sensor.temperature
                 hum = sensor.relative_humidity
+                #Appends Bus 1 Sensor Data
                 sensorsBus1.append(sensor_name)
                 addrsBus1.append(addrs)
                 tempsBus1.append(temp)
                 humiditiesBus1.append(hum)
+                #Takes Current Timestamp
                 now = time.localtime() #To Accurately Timestamp Each Sensor Separately, Must Copy to Each Enumeration of Try/Except
                 times = ("{:04d}-{:02d}-{:02d} " "{:02d}:{:02d}:{:02d}").format(now[0], now[1], now[2], now[3], now[4], now[5], now[6], now[7])
+                #Appends Timestamp
                 timestamps.append(times)
             except Exception as e:
-                #print(f"{sensor_name} ERROR:", e) #Exeception Error Print
+                #Appends Placeholder Bus 1 Sensor Data
                 sensorsBus1.append(sensor_name)
                 addrsBus1.append(addrs)
                 tempsBus1.append(0.0)
                 humiditiesBus1.append(0.0)
+                #Takes Current Timestamp
                 now = time.localtime() #To Accurately Timestamp Each Sensor Separately, Must Copy to Each Enumeration of Try/Except
                 times = ("{:04d}-{:02d}-{:02d} " "{:02d}:{:02d}:{:02d}").format(now[0], now[1], now[2], now[3], now[4], now[5], now[6], now[7])
+                #Appends Timestamp
                 timestamps.append(times)
         
+        #Debug Prints for Bus 0 & Bus 1
         print(f"\n================================SENSOR LOGGER================================")
         print(f"---BUS 0---")
         print("{} ({}): Temperature = {:.2f}°C  |  Humidity = {:.1f}%  |  {}".format(sensorsBus0[0], addrsBus0[0], tempsBus0[0], humiditiesBus0[0], timestamps[0])) #Bus 0 Sensor 1 Log
@@ -97,3 +114,4 @@ class HDC302X_Sensors:
         print("{} ({}): Temperature = {:.2f}°C  |  Humidity = {:.1f}%  |  {}".format(sensorsBus1[2], addrsBus1[2], tempsBus1[2], humiditiesBus1[2], timestamps[6])) #Bus 1 Sensor 7 Log
         print("{} ({}): Temperature = {:.2f}°C  |  Humidity = {:.1f}%  |  {}".format(sensorsBus1[3], addrsBus1[3], tempsBus1[3], humiditiesBus1[3], timestamps[7])) #Bus 1 Sensor 8 Log
         utime.sleep(1.0) #Delay in Seconds (Repeats the Debug Prints this Often)
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~END OF debug_readings() FUNCTION~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
