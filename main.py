@@ -7,9 +7,6 @@
 #main.py
 #Last Edit: NolanRH on 5/27/2026
 
-#Credit
-#If Labelled 'Debug Execution Timer' then it was copied from 'How to measure EXECUTION TIME in Python ⌚' by 'Bro Code' on YouTube
-
 #Project .py Imports
 from hdc302x_sensors import HDC302X_Sensors
 
