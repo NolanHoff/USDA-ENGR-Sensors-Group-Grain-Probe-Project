@@ -3,8 +3,7 @@
 #Created: 4/6/2026
 #Micro Controller: Raspberry Pi Pico W
 #Interpreter: MicroPython
-#Main Code
-#main.py
+#Main Code: main.py
 #Last Edit: NolanRH on 5/27/2026
 
 #Project .py Imports
