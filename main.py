@@ -10,7 +10,7 @@
 from hdc302x_sensors import HDC302X_Sensors
 
 #main.py Imports
-import utime, time
+import time
 
 #Toggles 1=True | 0=False
 debugToggle = 1
@@ -39,4 +39,4 @@ while True:
     print('Main Loop Executed Successfully!\n') #Debug Print
     
     #Creates a Delay Before Running the Next Iteration of the Main Loop
-    utime.sleep(5.0) #Delay in Seconds (Change this to Shorten/Lengthen Time between Samples)
+    time.sleep(5.0) #Delay in Seconds (Change this to Shorten/Lengthen Time between Samples)
