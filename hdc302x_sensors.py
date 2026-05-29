@@ -8,7 +8,7 @@
 
 #hdc302x_sensor.py Imports
 from machine import Pin, I2C
-import utime, time
+import time
 import hdc302x_library #Library Import (hdc302x_library.py)
 
 #Class Allows Import of all Included Functions
@@ -113,5 +113,5 @@ class HDC302X_Sensors:
         print("{} ({}): Temperature = {:.2f}°C  |  Humidity = {:.1f}%  |  {}".format(sensorsBus1[1], addrsBus1[1], tempsBus1[1], humiditiesBus1[1], timestamps[5])) #Bus 1 Sensor 6 Log
         print("{} ({}): Temperature = {:.2f}°C  |  Humidity = {:.1f}%  |  {}".format(sensorsBus1[2], addrsBus1[2], tempsBus1[2], humiditiesBus1[2], timestamps[6])) #Bus 1 Sensor 7 Log
         print("{} ({}): Temperature = {:.2f}°C  |  Humidity = {:.1f}%  |  {}".format(sensorsBus1[3], addrsBus1[3], tempsBus1[3], humiditiesBus1[3], timestamps[7])) #Bus 1 Sensor 8 Log
-        utime.sleep(1.0) #Delay in Seconds (Repeats the Debug Prints this Often)
+        time.sleep(0.25) #Delay in Seconds (Repeats the Debug Prints this Often)
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~END OF debug_readings() FUNCTION~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
